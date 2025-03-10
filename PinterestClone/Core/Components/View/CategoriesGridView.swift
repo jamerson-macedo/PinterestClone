@@ -17,7 +17,7 @@ struct CategoriesGridView: View {
     
     var body: some View {
         LazyVGrid(columns: gridItem, spacing: 1) {
-            ForEach(viewModel.items) { item in
+            ForEach(viewModel.filtredItems) { item in
                 CategoryItemView(item: item, width: imageDimensions)
         
             }

@@ -9,9 +9,11 @@ import SwiftUI
 
 struct SearchView: View {
     @State private var viewModel = SearchViewModel()
+
     var body: some View {
         NavigationStack{
             VStack{
+                SearchBarView(text: $viewModel.searchTerm, title: viewModel.title)
                 Text("Popular in Pinterest")
                     .font(.title2)
                     .fontWeight(.semibold)
