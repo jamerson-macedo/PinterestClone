@@ -33,12 +33,13 @@ struct MainTabView: View {
                 // não quero abrir uma nova tela entao o old tem que ser o selected tab
                 viewModel.selectedTab = old
                 viewModel.showCreateMenu = true
+                viewModel.isFullscreen = false
             }
             
         })
         .sheet(isPresented: $viewModel.showCreateMenu){
-            Text("Create")
-                .presentationDetents([.height(250)])
+            CreateView(isFullScreen: $viewModel.isFullscreen)
+                .presentationDetents(viewModel.isFullscreen ? [.large] : [.height(250)])
                 .presentationDragIndicator(.visible)
         }
     }
