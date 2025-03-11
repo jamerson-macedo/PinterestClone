@@ -11,4 +11,6 @@ import Observation
 @Observable
 class CreateViewModel {
     var showCreateBoard : Bool = false
+    var boardName : String = ""
+    var isSecretBoard : Bool = false
 }

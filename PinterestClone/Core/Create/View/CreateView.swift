@@ -13,7 +13,7 @@ struct CreateView: View {
     @Environment(\.dismiss) private var dismiss
     var body: some View {
         if viewModel.showCreateBoard{
-            Text("Create board")
+            CreateBoardVIew(viewModel: viewModel)
         }else {
             NavigationStack {
                 VStack(spacing:25){
