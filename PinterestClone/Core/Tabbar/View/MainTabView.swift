@@ -11,7 +11,7 @@ struct MainTabView: View {
     @State private var viewModel = MainTabViewModel()
     var body: some View {
         TabView(selection: $viewModel.selectedTab) {
-            Text("Home").tabItem {
+            HomeView().tabItem {
                 Label("Home",systemImage: "house.fill")
             }.tag(0)
             SearchView().tabItem {

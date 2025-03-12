@@ -34,7 +34,7 @@ struct NotificationView: View {
                 
                 UpdatesView()
             case .Inbox:
-                InboxView()
+                InboxView(viewModel: viewModel)
             }
             Spacer()
         }

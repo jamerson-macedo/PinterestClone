@@ -16,5 +16,6 @@ enum NotificationTabSelection{
 @Observable
 class NotificationViewModel {
     var tabSelection: NotificationTabSelection = .Updates
+    var searchText: String = ""
 }
 
