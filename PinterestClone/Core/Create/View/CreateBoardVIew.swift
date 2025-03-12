@@ -29,7 +29,7 @@ struct CreateBoardVIew: View {
                     }
                     Spacer()
                     Button {
-                        
+                        viewModel.showAddPinView.toggle()
                     } label: {
                         Text("Next")
                             .font(.headline)
@@ -74,6 +74,9 @@ struct CreateBoardVIew: View {
             Spacer()
         }
         .padding(.horizontal)
+        .fullScreenCover(isPresented: $viewModel.showAddPinView) {
+            AddPinView(viewModel: viewModel)
+        }
     }
 }
 
