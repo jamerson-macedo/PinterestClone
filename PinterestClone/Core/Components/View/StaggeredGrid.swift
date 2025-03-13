@@ -16,7 +16,7 @@ struct StaggeredGrid: View {
     }
     // deixando os itens em zigzag
     func setupList() -> [[Item]]{
-        var gridArray : [[Item]] = Array(repeating: [], count: 2)
+        var gridArray : [[Item]] = Array(repeating: [], count: columns)
         var currentIndex : Int = 0
         for item in items{
             gridArray[currentIndex].append(item)
@@ -28,22 +28,14 @@ struct StaggeredGrid: View {
         }
         return gridArray
     }
+    
     var body: some View {
         ScrollView {
             HStack(alignment: .top,spacing: 10){
                 ForEach(setupList(),id: \.self) { columnData in
                     LazyVStack(spacing : 10){
                         ForEach(columnData) { item in
-                            VStack(alignment : .trailing){
-                                Image(item.imageName)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(maxWidth: .infinity)
-                                    .clipped()
-                                Image(systemName: "ellipsis")
-                                    .imageScale(.large)
-                                    .padding(.vertical)
-                            }
+                            ItemCard(item: item)
                         }
                     }
                 }
@@ -62,4 +54,24 @@ struct StaggeredGrid: View {
         .init(id: UUID().uuidString, item_name: "", isSelected: false, imageName: "selfie")
         
     ], columns: 2)
+}
+
+struct ItemCard: View {
+    private var item: Item
+    
+    init(item: Item) {
+        self.item = item
+    }
+    var body: some View {
+        VStack(alignment : .trailing){
+            Image(item.imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(maxWidth: .infinity)
+                .clipShape(RoundedRectangle(cornerRadius: 15))
+            Image(systemName: "ellipsis")
+                .imageScale(.large)
+                .padding(.vertical)
+        }
+    }
 }

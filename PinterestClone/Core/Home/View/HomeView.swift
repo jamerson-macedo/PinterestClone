@@ -17,6 +17,7 @@ struct HomeView: View {
                     .fontWeight(.semibold)
                 Rectangle().frame(width: 32,height: 4)
                 StaggeredGrid(items: viewModel.items, columns: 2)
+                    .padding()
             }
         }
     }
