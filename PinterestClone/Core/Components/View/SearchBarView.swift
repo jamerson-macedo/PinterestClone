@@ -11,16 +11,29 @@ struct SearchBarView: View {
     @Binding var text: String
     var title : String
     var showImageIcon : Bool = true
+    var aligments : Alignment = .trailing
     var body: some View {
-        ZStack(alignment : .trailing){
+        ZStack(alignment : aligments){
             TextField(title,text: $text)
-            Image(systemName: text.isEmpty ? "camera.fill" :"xmark.circle.fill")
-                .padding(.trailing,5)
-                .foregroundStyle(.gray)
-                .opacity(showImageIcon ? 1 : 0)
-                .onTapGesture {
-                    text = ""
-                }
+                .padding(.leading, aligments == .leading ? 30 : 0)
+            if aligments == .trailing {
+                Image(systemName: text.isEmpty ? "camera.fill" :"xmark.circle.fill")
+                    .padding(.trailing,5)
+                    .foregroundStyle(.gray)
+                    .opacity(showImageIcon ? 1 : 0)
+                    .onTapGesture {
+                        text = ""
+                    }
+            }else {
+                Image(systemName: text.isEmpty ? "magnifyingglass" :"xmark.circle.fill")
+                    .padding(.trailing,5)
+                    .foregroundStyle(.gray)
+                    .opacity(showImageIcon ? 1 : 0)
+                    .onTapGesture {
+                        text = ""
+                    }
+            }
+            
                
         }
         .font(.headline)

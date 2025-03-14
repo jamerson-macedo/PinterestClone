@@ -24,7 +24,7 @@ struct MainTabView: View {
             NotificationView().tabItem {
                 Label("Notifications",systemImage: "ellipsis.message.fill")
             }.tag(3)
-            Text("Saved").tabItem {
+            SavedView().tabItem {
                 Label("Saved",systemImage: "person")
             }.tag(4)
         }
