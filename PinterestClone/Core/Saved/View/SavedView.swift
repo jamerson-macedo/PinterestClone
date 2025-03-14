@@ -67,7 +67,7 @@ struct SavedView: View {
                     StaggeredGrid(items: viewModel.items, columns: 3)
                         .padding()
                 case .board:
-                    Text("Board")
+                    BoardView(viewModel: viewModel)
                 }
                 Spacer()
             }
