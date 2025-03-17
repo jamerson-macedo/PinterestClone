@@ -72,12 +72,21 @@ struct SavedView: View {
                     }
                     switch viewModel.selectedTab {
                     case .pin:
-                        StaggeredGrid(items: viewModel.items, columns: 3){ item in
-                            ItemCard(item: item)
-                            
-                        }.padding()
+                        if viewModel.items.count == 0{
+                            EmptyPinView(viewModel: viewModel)
+                        }else{
+                            StaggeredGrid(items: viewModel.items, columns: 3){ item in
+                                ItemCard(item: item)
+                                
+                            }.padding()
+                        }
                     case .board:
-                        BoardView(viewModel: viewModel)
+                        if viewModel.boardWithPins.count == 0{
+                            EmptyBoardView(viewModel: viewModel)
+                        }else {
+                            BoardView(viewModel: viewModel)
+                        }
+                      
                     }
                     Spacer()
                 }

@@ -48,7 +48,7 @@ struct StaggeredGrid<Content: View,T: Identifiable>: View  where T:Hashable{
 }
 
 #Preview {
-    var items : [Item] = [
+    let items : [Item] = [
         .init(id: UUID().uuidString, item_name: "", isSelected: false, imageName: "egito1"),
         .init(id: UUID().uuidString, item_name: "", isSelected: false, imageName: "egito2"),
         .init(id: UUID().uuidString, item_name: "", isSelected: false, imageName: "dp"),
