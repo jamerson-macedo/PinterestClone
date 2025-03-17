@@ -16,13 +16,23 @@ struct HomeView: View {
                     .font(.title2)
                     .fontWeight(.semibold)
                 Rectangle().frame(width: 32,height: 4)
-                StaggeredGrid(items: viewModel.items, columns: 2)
-                    .padding()
+                
+                StaggeredGrid(items: viewModel.items, columns: 2){ item in
+                    NavigationLink {
+                        DetailView(viewModel: viewModel, index: viewModel.items.firstIndex(where: {
+                            $0.id == item.id
+                        }) ?? 0).navigationBarBackButtonHidden()
+                    } label: {
+                        ItemCard(item: item)
+                    }
+                }.padding()
             }
         }
     }
 }
 
 #Preview {
-    HomeView()
+    NavigationStack{
+        HomeView()
+    }
 }

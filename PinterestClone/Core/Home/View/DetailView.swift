@@ -98,7 +98,10 @@ struct DetailView: View {
                 Text("More to explore")
                     .font(.headline)
                     .foregroundStyle(Color(.darkGray))
-                StaggeredGrid(items: viewModel.items, columns: 2)
+                StaggeredGrid(items: viewModel.items, columns: 2){ item in
+                    ItemCard(item: item)
+                    
+                }
 
             }.padding(.horizontal)
                 .padding(.top)

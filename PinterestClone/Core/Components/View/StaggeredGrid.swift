@@ -7,16 +7,18 @@
 
 import SwiftUI
 
-struct StaggeredGrid: View {
-    private var items : [Item]
+struct StaggeredGrid<Content: View,T: Identifiable>: View  where T:Hashable{
+    private var items : [T]
     private var columns : Int
-    init(items: [Item], columns: Int) {
+    private var content : (T) -> Content
+    init(items: [T], columns: Int, @ViewBuilder content: @escaping (T) -> Content) {
         self.items = items
         self.columns = columns
+        self.content = content
     }
     // deixando os itens em zigzag
-    func setupList() -> [[Item]]{
-        var gridArray : [[Item]] = Array(repeating: [], count: columns)
+    func setupList() -> [[T]]{
+        var gridArray : [[T]] = Array(repeating: [], count: columns)
         var currentIndex : Int = 0
         for item in items{
             gridArray[currentIndex].append(item)
@@ -35,7 +37,8 @@ struct StaggeredGrid: View {
                 ForEach(setupList(),id: \.self) { columnData in
                     LazyVStack(spacing : 10){
                         ForEach(columnData) { item in
-                            ItemCard(item: item)
+                            //ItemCard(item: item)
+                            content(item)
                         }
                     }
                 }
@@ -45,7 +48,7 @@ struct StaggeredGrid: View {
 }
 
 #Preview {
-    StaggeredGrid(items: [
+    var items : [Item] = [
         .init(id: UUID().uuidString, item_name: "", isSelected: false, imageName: "egito1"),
         .init(id: UUID().uuidString, item_name: "", isSelected: false, imageName: "egito2"),
         .init(id: UUID().uuidString, item_name: "", isSelected: false, imageName: "dp"),
@@ -53,7 +56,10 @@ struct StaggeredGrid: View {
         .init(id: UUID().uuidString, item_name: "", isSelected: false, imageName: "purple"),
         .init(id: UUID().uuidString, item_name: "", isSelected: false, imageName: "selfie")
         
-    ], columns: 2)
+    ]
+    StaggeredGrid(items: items, columns: 2) { item in
+        ItemCard(item: item)
+    }
 }
 
 struct ItemCard: View {

@@ -72,8 +72,10 @@ struct SavedView: View {
                     }
                     switch viewModel.selectedTab {
                     case .pin:
-                        StaggeredGrid(items: viewModel.items, columns: 3)
-                            .padding()
+                        StaggeredGrid(items: viewModel.items, columns: 3){ item in
+                            ItemCard(item: item)
+                            
+                        }.padding()
                     case .board:
                         BoardView(viewModel: viewModel)
                     }
