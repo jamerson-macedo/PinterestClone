@@ -20,12 +20,9 @@ struct LoginView: View {
                     Text("Welcome to Pinterest")
                         .font(.title)
                         .fontWeight(.bold)
-                    TextField("Email address",text: $viewModel.email)
-                        .padding(12)
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 10).stroke(Color(.systemGray3),lineWidth: 1)
-                        }
+                    TextField("Email address",text: $viewModel.email).emailmodifier()
                     LoginButton(title: "Continue") {
+                        viewModel.showSignInView.toggle()
                     }.padding(.bottom)
 
                     LoginButton(title: "Continue with Facebook", imageName: "facebook", color: .blue) {
@@ -34,6 +31,7 @@ struct LoginView: View {
                     LoginButton(title: "Continue with Google", imageName: "google", color: Color(.systemGray5), foregroundColor: .black) {
                     }
                     Spacer()
+                    
                     Text("By continuing, you agree to Pinterest's")
                         .font(.footnote) +
                     Text(" Terms of Service and Privacy Policy.")
@@ -47,6 +45,9 @@ struct LoginView: View {
                 }
                 
             }.padding()
+                .fullScreenCover(isPresented: $viewModel.showSignInView) {
+                    SignInView(viewModel: viewModel)
+                }
         }
     }
 }
