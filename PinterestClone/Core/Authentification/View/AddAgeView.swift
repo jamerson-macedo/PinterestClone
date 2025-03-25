@@ -38,7 +38,7 @@ struct AddAgeView: View {
                     
                     Spacer()
                     NavigationLink {
-                        AddNameView(viewModel: viewModel).navigationBarBackButtonHidden()
+                        AddGenderView(viewModel: viewModel).navigationBarBackButtonHidden()
                     } label: {
                         Text("Next")
                             .font(.headline)

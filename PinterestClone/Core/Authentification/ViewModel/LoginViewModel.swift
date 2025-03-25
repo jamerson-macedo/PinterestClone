@@ -17,6 +17,7 @@ class LoginViewModel {
     var showAddPasswordView : Bool = false
     var fullName: String = ""
     var birthDate: String = ""
+    var gender : String = ""
     var isPresented: Bool = true
     var selectedDate : Date = Date()
     var tempDate : Date = Date()
@@ -25,6 +26,7 @@ class LoginViewModel {
     var avalialbleYears : [Int] {
         Array((1900...2025).reversed())
     }
+    var isNavigationActive : Bool = false
     func checIfEmailexists() async throws ->Bool {
         return false
     }
