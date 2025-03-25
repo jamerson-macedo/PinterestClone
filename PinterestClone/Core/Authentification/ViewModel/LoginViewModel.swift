@@ -26,6 +26,8 @@ class LoginViewModel {
     var avalialbleYears : [Int] {
         Array((1900...2025).reversed())
     }
+    var showCountriesList : Bool = false
+    var country : String = "Brasil"
     var isNavigationActive : Bool = false
     func checIfEmailexists() async throws ->Bool {
         return false
