@@ -22,12 +22,18 @@ struct LoginView: View {
                         .fontWeight(.bold)
                     TextField("Email address",text: $viewModel.email).emailmodifier()
                     LoginButton(title: "Continue") {
-                        viewModel.showSignInView.toggle()
+                        Task{
+                            if try await viewModel.checIfEmailexists() {
+                                viewModel.showSignInView.toggle()
+                            } else {
+                                viewModel.showAddPasswordView.toggle()
+                            }
+                        }
                     }.padding(.bottom)
-
+                    
                     LoginButton(title: "Continue with Facebook", imageName: "facebook", color: .blue) {
                     }
-
+                    
                     LoginButton(title: "Continue with Google", imageName: "google", color: Color(.systemGray5), foregroundColor: .black) {
                     }
                     Spacer()
@@ -48,6 +54,9 @@ struct LoginView: View {
                 .fullScreenCover(isPresented: $viewModel.showSignInView) {
                     SignInView(viewModel: viewModel)
                 }
+                .navigationDestination(isPresented: $viewModel.showAddPasswordView) {
+                    AddPasswordView(viewModel: viewModel).navigationBarBackButtonHidden()
+                }
         }
     }
 }
@@ -61,13 +70,13 @@ struct LoginButton: View {
     private var imageName: String?
     private var color: Color
     private var foregroundColor: Color
-    private var action: () -> Void
+    private var action: () async-> Void
     
     init(title: String,
          imageName: String? = nil,
          color: Color = .red,
          foregroundColor: Color = .white,
-         action: @escaping () -> Void) {
+         action: @escaping @MainActor @Sendable () async -> Void) {
         self.title = title
         self.imageName = imageName
         self.color = color
@@ -76,7 +85,11 @@ struct LoginButton: View {
     }
     
     var body: some View {
-        Button(action: action) {
+        Button{
+            Task {
+                await action()
+            }
+        } label:{
             HStack {
                 if let imageName = imageName {
                     Image(imageName)
@@ -84,11 +97,11 @@ struct LoginButton: View {
                         .frame(width: 24, height: 24)
                         .padding(.leading)
                 }
-              
+                
                 Text(title)
                     .foregroundStyle(foregroundColor)
                     .font(.headline)
-             
+                
             }
             .frame(width: 350, height: 44)
             .background(color)
