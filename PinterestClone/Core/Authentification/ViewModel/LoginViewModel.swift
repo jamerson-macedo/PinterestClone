@@ -5,9 +5,8 @@
 //  Created by Jamerson Macedo on 17/03/25.
 //
 
-import Foundation
 import Observation
-
+import SwiftUI
 @Observable
 class LoginViewModel {
     var email: String = ""
@@ -26,6 +25,24 @@ class LoginViewModel {
     var avalialbleYears : [Int] {
         Array((1900...2025).reversed())
     }
+    
+    var interest : [Interest] = [
+        .init(id: UUID().uuidString, itemName: "Anime", imageName: "anime", isSelected: false),
+        .init(id: UUID().uuidString, itemName: "wallpapers", imageName: "beach", isSelected: false),
+        .init(id: UUID().uuidString, itemName: "Cars", imageName: "car", isSelected: false),
+        .init(id: UUID().uuidString, itemName: "Football", imageName: "cr7", isSelected: false),
+        .init(id: UUID().uuidString, itemName: "Anime", imageName: "anime", isSelected: false),
+        .init(id: UUID().uuidString, itemName: "wallpapers", imageName: "beach", isSelected: false),
+        .init(id: UUID().uuidString, itemName: "Cars", imageName: "car", isSelected: false),
+        .init(id: UUID().uuidString, itemName: "Football", imageName: "cr7", isSelected: false),
+     
+    ]
+    var gridItems : [GridItem] = [
+        .init(.flexible(),spacing: 1),
+        .init(.flexible(),spacing: 1),
+        .init(.flexible(),spacing: 1),
+    ]
+    var selectedInterest : [Interest] = []
     var showCountriesList : Bool = false
     var country : String = "Brasil"
     var isNavigationActive : Bool = false

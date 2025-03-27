@@ -23,31 +23,37 @@ struct AddCountryView: View {
                 Text("This help us find you more relelated content. We won't show it to your profile")
                     .font(.title3)
                     .padding(.bottom)
-                TextField("Country", text: $viewModel.country)
-                    .emailmodifier()
-                    .disabled(true)
-                    .overlay(alignment : .trailing){
-                        Image(systemName: "chevron.right")
-                            .padding(.trailing)
-                            .foregroundStyle(.gray)
+                ZStack{
+                    TextField("Country", text: $viewModel.country)
+                        .emailmodifier()
+                        .disabled(true)
+                        .overlay(alignment : .trailing){
+                            Image(systemName: "chevron.right")
+                                .padding(.trailing)
+                                .foregroundStyle(.gray)
+                        }
+                    Button {
+                      
+                            viewModel.showCountriesList = true
+                       
+                    } label: {
+                        Rectangle().fill(.clear)
+                            .frame(width: proxy.size.width * 0.9, height: 44)
                     }
-                   
-                    .onTapGesture {
-                        viewModel.showCountriesList = true
-                    }
-                
-          
+
+                    
+                }
 
                 Spacer()
                 NavigationLink {
-                    //AddAgeView(viewModel: viewModel).navigationBarBackButtonHidden()
+                    InterestView(viewModel: viewModel).navigationBarBackButtonHidden()
                 } label: {
                     Text("Next")
                         .font(.headline)
                         .fontWeight(.semibold)
                         .frame(width: proxy.size.width * 0.9, height: 60)
-                        .background(viewModel.fullName.count < 3 ? Color(.systemGray5) :.red)
-                        .foregroundStyle(viewModel.fullName.count < 3 ? .black : .white)
+                        .background(.red)
+                        .foregroundStyle( .white)
                         .clipShape(RoundedRectangle(cornerRadius: 30))
                     
                     
@@ -56,7 +62,7 @@ struct AddCountryView: View {
             }
             .padding()
             .fullScreenCover(isPresented: $viewModel.showCountriesList) {
-                Text("Countries list")
+                ListCountriesView(viewModel: viewModel)
             }
             .toolbar{
                 ToolbarItem(placement: .topBarLeading) {
