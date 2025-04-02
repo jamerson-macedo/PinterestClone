@@ -14,15 +14,23 @@ struct CreateView: View {
     var body: some View {
         if viewModel.showCreateBoard{
             CreateBoardVIew(viewModel: viewModel)
+        }else if viewModel.showFullScreenGallery{
+            FullScreenPhotoGalleryView(viewModel: viewModel)
         }else {
             NavigationStack {
                 VStack(spacing:25){
                     Text("Start creating now")
                         .font(.title3)
                         .fontWeight(.semibold)
-                    
                     HStack(spacing : 50){
-                        CreateOptionView(titleIcons: "Pin", icon: "pin.fill")
+                        Button {
+                            viewModel.showFullScreenGallery = true
+                            isFullScreen = true
+                        } label: {
+                            CreateOptionView(titleIcons: "Pin", icon: "pin.fill")
+                        }
+
+                       
                         CreateOptionView(titleIcons: "Colege", icon: "scissors")
                         Button {
                             viewModel.showCreateBoard = true
