@@ -20,6 +20,26 @@ class CreateViewModel {
     var link : String = ""
     var tags : String = ""
     var selectedBoard : String = "Profile"
+    var showTagSheet : Bool = false
+    var searhText : String = "h"
+    var selectedTopics : Set<String> = []
+    var topicGridItems : [GridItem] = [
+        GridItem(.flexible(),spacing : 8),
+        GridItem(.flexible(),spacing : 8),
+        
+    ]
+    private var allTopics : [String] = [
+        "Hair care", "Sport", "Halloween", "Happy birthday", "Hand tattoo", "Harley Quinn", "Fashion", "Cute Hairstyles", "Halloween Nails"
+    ]
+    var displayTopics : [String] {
+        var topics = Array(selectedTopics)
+        let nonSelectedFilteredTopics = allTopics.filter { topic in
+            topic.lowercased().contains(searhText.lowercased()) && !selectedTopics.contains(topic)
+        }
+        topics.append(contentsOf: nonSelectedFilteredTopics)
+        return topics
+        
+    }
     var pins : [Item] = [
         .init(id: UUID().uuidString, item_name: "Nice car", isSelected: false, imageName: "car"),
         .init(id: UUID().uuidString, item_name: "Best car", isSelected: false, imageName: "dp"),
@@ -62,5 +82,12 @@ class CreateViewModel {
         }
         photoAssets = fetchResult.objects(at: IndexSet(0 ..< fetchResult.count))
         
+    }
+    func toggleSelection(_ topic : String){
+        if selectedTopics.contains(topic){
+            selectedTopics.remove(topic)
+        }else {
+            selectedTopics.insert(topic)
+        }
     }
 }

@@ -41,7 +41,13 @@ struct CreatePinView: View {
                     PinItemView(text: $viewModel.link, title: "Link", description: "Add yor link here", color: .gray)
                     
                     HorizontalPinItemView(selectedBoard: viewModel.selectedBoard, title: "Pick a board").padding(.vertical)
-                    HorizontalPinItemView(selectedBoard: viewModel.tags, title: "Tag topics").padding(.vertical)
+                   
+                    Button {
+                        viewModel.showTagSheet.toggle()
+                    } label: {
+                        HorizontalPinItemView(selectedBoard: viewModel.selectedTopics.count > 0 ? "\(viewModel.selectedTopics.count)" : "", title: "Tag topics").padding(.vertical)
+                    }
+
                     HStack{
                         Circle().fill(Color(.systemGray5))
                             .frame(width: 45,height: 45)
@@ -66,6 +72,9 @@ struct CreatePinView: View {
                 }
                 
             }
+            .fullScreenCover(isPresented: $viewModel.showTagSheet, content: {
+                TagTopicView(viewModel: viewModel)
+            })
             .scrollIndicators(.hidden)
             .navigationTitle("Create Pin")
             .navigationBarTitleDisplayMode(.inline)
