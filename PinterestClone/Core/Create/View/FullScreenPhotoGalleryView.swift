@@ -26,8 +26,7 @@ struct FullScreenPhotoGalleryView: View {
                                 .imageScale(.large)
                         }
                         Spacer()
-                        
-                        
+                    
                         Button {
                             dismiss()
                         } label: {
@@ -73,6 +72,7 @@ struct FullScreenPhotoGalleryView: View {
                 .scrollIndicators(.hidden)
                 .padding(.bottom,viewModel.selectedPhotos.isEmpty ? 0 : 100)
                 .onAppear{
+                    
                     viewModel.checkPhotoPermission()
                 }
                 if !viewModel.selectedPhotos.isEmpty {

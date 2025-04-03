@@ -15,7 +15,11 @@ class CreateViewModel {
     var boardName : String = ""
     var isSecretBoard : Bool = false
     var showAddPinView : Bool = false
-    
+    var title : String = ""
+    var description : String = ""
+    var link : String = ""
+    var tags : String = ""
+    var selectedBoard : String = "Profile"
     var pins : [Item] = [
         .init(id: UUID().uuidString, item_name: "Nice car", isSelected: false, imageName: "car"),
         .init(id: UUID().uuidString, item_name: "Best car", isSelected: false, imageName: "dp"),
