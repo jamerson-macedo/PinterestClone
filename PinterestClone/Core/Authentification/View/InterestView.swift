@@ -79,8 +79,8 @@ struct InterestView: View {
                 }
                 HStack {
                     Spacer()
-                    NavigationLink {
-                        
+                    Button {
+                        Task{ try await viewModel.createUser() }
                     } label: {
                         Text("Next")
                             .font(.headline)
@@ -91,6 +91,7 @@ struct InterestView: View {
                         
                             .clipShape(RoundedRectangle(cornerRadius: 30))
                     }
+
                     Spacer()
                 }
                 

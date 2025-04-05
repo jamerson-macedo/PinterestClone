@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		CF3F995D2DA14DE60095FF15 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CF3F995C2DA14DE60095FF15 /* FirebaseAuth */; };
+		CF3F995F2DA14DE60095FF15 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = CF3F995E2DA14DE60095FF15 /* FirebaseCore */; };
+		CF3F99612DA14DE60095FF15 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CF3F99602DA14DE60095FF15 /* FirebaseFirestore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		CFEFCBE92D7F745800B0EED7 /* PinterestClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinterestClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +29,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF3F995F2DA14DE60095FF15 /* FirebaseCore in Frameworks */,
+				CF3F995D2DA14DE60095FF15 /* FirebaseAuth in Frameworks */,
+				CF3F99612DA14DE60095FF15 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +74,9 @@
 			);
 			name = PinterestClone;
 			packageProductDependencies = (
+				CF3F995C2DA14DE60095FF15 /* FirebaseAuth */,
+				CF3F995E2DA14DE60095FF15 /* FirebaseCore */,
+				CF3F99602DA14DE60095FF15 /* FirebaseFirestore */,
 			);
 			productName = PinterestClone;
 			productReference = CFEFCBE92D7F745800B0EED7 /* PinterestClone.app */;
@@ -94,6 +106,9 @@
 			);
 			mainGroup = CFEFCBE02D7F745800B0EED7;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				CF3F995B2DA14DE60095FF15 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = CFEFCBEA2D7F745800B0EED7 /* Products */;
 			projectDirPath = "";
@@ -328,6 +343,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CF3F995B2DA14DE60095FF15 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CF3F995C2DA14DE60095FF15 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF3F995B2DA14DE60095FF15 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		CF3F995E2DA14DE60095FF15 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF3F995B2DA14DE60095FF15 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		CF3F99602DA14DE60095FF15 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF3F995B2DA14DE60095FF15 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CFEFCBE12D7F745800B0EED7 /* Project object */;
 }
