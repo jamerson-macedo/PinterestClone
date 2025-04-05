@@ -28,6 +28,7 @@ class CreateViewModel {
         GridItem(.flexible(),spacing : 8),
         
     ]
+    var showBoardSheet : Bool = false
     private var allTopics : [String] = [
         "Hair care", "Sport", "Halloween", "Happy birthday", "Hand tattoo", "Harley Quinn", "Fashion", "Cute Hairstyles", "Halloween Nails"
     ]

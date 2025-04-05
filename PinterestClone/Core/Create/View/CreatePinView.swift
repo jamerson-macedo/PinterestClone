@@ -39,8 +39,13 @@ struct CreatePinView: View {
                     PinItemView(text: $viewModel.title, title: "Title", description: "Tell everyone what yoir Pin is about", color: Color(.darkGray))
                     PinItemView(text: $viewModel.description, title: "Decription", description: "Add a description, mention or hastags to your Pin", color: .gray)
                     PinItemView(text: $viewModel.link, title: "Link", description: "Add yor link here", color: .gray)
-                    
-                    HorizontalPinItemView(selectedBoard: viewModel.selectedBoard, title: "Pick a board").padding(.vertical)
+                    Button {
+                        viewModel.showBoardSheet.toggle()
+                    } label: {
+                        HorizontalPinItemView(selectedBoard: viewModel.selectedBoard, title: "Pick a board").padding(.vertical)
+                    }
+
+                   
                    
                     Button {
                         viewModel.showTagSheet.toggle()
@@ -74,6 +79,11 @@ struct CreatePinView: View {
             }
             .fullScreenCover(isPresented: $viewModel.showTagSheet, content: {
                 TagTopicView(viewModel: viewModel)
+            })
+            .sheet(isPresented: $viewModel.showBoardSheet, content: {
+                SaveToBoardSheet(viewModel: viewModel)
+                    .presentationDragIndicator(.visible)
+                    .presentationDetents([.medium])
             })
             .scrollIndicators(.hidden)
             .navigationTitle("Create Pin")
