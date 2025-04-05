@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AccountView: View {
+    @State private var viewModel = AccountViewModel()
     @Environment(\.dismiss) private var dismiss
     var body: some View {
         ScrollView {
@@ -22,7 +23,13 @@ struct AccountView: View {
                     .font(.subheadline)
                 ForEach(LoginOption.allCases){ option in
                     if option == .logout{
-                        SettingsOption(title: option.title, imageName: "")
+                        Button {
+                            viewModel.signOut()
+                        } label: {
+                            SettingsOption(title: option.title, imageName: "")
+                        }
+
+                      
                     }else {
                         SettingsOption(title: option.title)
                     }

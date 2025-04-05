@@ -47,7 +47,7 @@ class LoginViewModel {
     var country : String = "Brasil"
     var isNavigationActive : Bool = false
     func checIfEmailexists() async throws ->Bool {
-        return false
+        await AuthService.shared.checkIfEmailExists(email: email)
     }
     func dayComponents(day : Int) -> Date {
         calendar.date(from: DateComponents(
