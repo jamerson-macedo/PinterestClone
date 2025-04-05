@@ -39,6 +39,7 @@ class AuthService{
     func signOut() {
         try? Auth.auth().signOut()
         self.userSession = nil
+        UserService.shared.reset()
     }
     func checkIfEmailExists(email: String) async -> Bool {
         do {
@@ -47,6 +48,16 @@ class AuthService{
         }catch{
             print("Error checking")
             return false
+        }
+    }
+    @MainActor
+    func login(email:String, password : String) async throws {
+        do{
+            let result = try await Auth.auth().signIn(withEmail: email, password: password)
+            self.userSession = result.user
+            try await UserService.shared.fetchCurrentUser()
+        }catch{
+            print("Failded login\(error.localizedDescription)")
         }
     }
 }

@@ -42,7 +42,9 @@ struct SignInView: View {
             
             CustomSecureField(isSecureField: $viewModel.isSecureField, password: $viewModel.password)
             LoginButton(title: "Log In") {
-                
+                Task{
+                    try await viewModel.login()
+                }
             }
             .padding(.top,30)
             Text("Forgotten password?")

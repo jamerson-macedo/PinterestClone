@@ -62,7 +62,8 @@ struct SavedView: View {
                     .padding(.horizontal)
                     HStack(spacing:0){
                         SearchBarView(text: $viewModel.searchTerm, title: "Search your Pins",aligments: .leading)
-                            .frame(width: proxy.size.width - 50)
+                        //Use a largura da tela menos 50, mas nunca menos que zero.
+                            .frame(width: max(0, proxy.size.width - 50))
                         Button {
                             //
                         } label: {
