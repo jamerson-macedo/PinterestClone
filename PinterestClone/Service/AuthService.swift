@@ -10,6 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import Firebase
 import Observation
+import GoogleSignIn
 @Observable
 class AuthService{
     static let shared = AuthService()
@@ -58,6 +59,31 @@ class AuthService{
             try await UserService.shared.fetchCurrentUser()
         }catch{
             print("Failded login\(error.localizedDescription)")
+        }
+    }
+    
+}
+extension AuthService{
+    func signIn(credential : AuthCredential) async throws -> User{
+        let authDataResult = try await Auth.auth().signIn(with: credential)
+        return authDataResult.user
+        
+    }
+    func signInWithGoogle(tokens: GoogleSignInResultModel) async throws{
+        do{
+            let credential = GoogleAuthProvider.credential(withIDToken: tokens.idToken, accessToken: tokens.accessToken)
+            self.userSession = try await self.signIn(credential: credential)
+            if let email = userSession?.email{
+                // se o email ja existe então faz so o login se não faz o upload
+                if await !checkIfEmailExists(email: email){
+                    try await uploadUserData(name: userSession?.displayName ?? "", email: userSession?.email ?? "", id: userSession?.uid ?? UUID().uuidString, gender: "", birthDate: "", selectedInterests: [])
+                }else {
+                    try await UserService.shared.fetchCurrentUser()
+                }
+            }
+            
+        }catch{
+            print("Error during google signIn \(error.localizedDescription)")
         }
     }
 }

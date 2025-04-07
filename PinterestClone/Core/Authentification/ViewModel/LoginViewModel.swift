@@ -80,4 +80,10 @@ class LoginViewModel {
     func login() async throws {
         try await AuthService.shared.login(email: email, password: password)
     }
+    @MainActor
+    func signInGoogle() async throws {
+        let helper = SignInGoogleHelper()
+        let tokens = try await helper.signIn()
+        try await AuthService.shared.signInWithGoogle(tokens: tokens)
+    }
 }

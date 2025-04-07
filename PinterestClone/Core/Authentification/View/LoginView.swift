@@ -35,6 +35,10 @@ struct LoginView: View {
                     }
                     
                     LoginButton(title: "Continue with Google", imageName: "google", color: Color(.systemGray5), foregroundColor: .black) {
+                        Task{
+                            try await viewModel.signInGoogle()
+                        }
+
                     }
                     Spacer()
                     
